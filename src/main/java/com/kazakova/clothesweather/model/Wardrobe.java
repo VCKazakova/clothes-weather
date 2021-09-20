@@ -1,7 +1,9 @@
 package com.kazakova.clothesweather.model;
 
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
@@ -10,6 +12,8 @@ import javax.persistence.*;
 @Setter
 @Entity
 @Table(name = "clothes")
+@AllArgsConstructor
+@NoArgsConstructor
 public class Wardrobe {
 
     @Id

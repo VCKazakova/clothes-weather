@@ -4,6 +4,7 @@ public enum Type {
     TOP,
     BOTTOM,
     SET,
+    DRESS,
     COAT,
     SHOES;
 }
