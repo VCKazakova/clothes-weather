@@ -2,8 +2,6 @@ package com.kazakova.clothesweather.controller;
 
 
 import com.kazakova.clothesweather.model.Season;
-import com.kazakova.clothesweather.model.Style;
-import com.kazakova.clothesweather.model.Type;
 import com.kazakova.clothesweather.model.Wardrobe;
 import com.kazakova.clothesweather.service.WardrobeService;
 import lombok.RequiredArgsConstructor;
@@ -11,7 +9,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
 
@@ -53,15 +53,6 @@ public class WardrobeController {
     }
 
 
-    @GetMapping("/wardrobe/{id}")
-    public String getOneById(@PathVariable("id") Long id, Model model) {
-        log.info(">> WardrobeController getOneById id={}", id);
-        Wardrobe stuff = wardrobeService.findStuffById(id).orElseThrow();
-        model.addAttribute("stuff", stuff);
-        log.info(">> WardrobeController getOneById stuff={}", stuff);
-        return "stuff";
-    }
-
     @GetMapping("/wardrobe/create")
     public String createStuffForm(Wardrobe wardrobe) {
         return "wardrobe-create";
@@ -97,48 +88,4 @@ public class WardrobeController {
         log.info(">> WardrobeController updateStuff stuff={}", stuff);
         return "redirect:/wardrobe";
     }
-
-    @GetMapping("/wardrobe/{style}")
-    public String getAllByStyle(@PathVariable("style") Style style, Model model) {
-        log.info(">> WardrobeController getAllByStyle  style={}", style);
-        List<Wardrobe> clothes = wardrobeService.findAllByStyle(style);
-        model.addAttribute("wardrobe", clothes);
-        log.info(">> WardrobeController getAllByStyle wardrobe={}", clothes);
-        switch (style) {
-            case CASUAL:
-                return "CASUAL";
-            case CHIC:
-                return "CHIC";
-            case CLASSIC:
-                return "CLASSIC";
-            case SPORT:
-                return "SPORT";
-            default:
-                return "redirect:/";
-        }
-    }
-
-    @GetMapping("/wardrobe/{type}")
-    public String getAllByType(@PathVariable("type") Type type, Model model) {
-        log.info(">> WardrobeController getAllByType  type={}", type);
-        List<Wardrobe> clothes = wardrobeService.findAllByType(type);
-        model.addAttribute("wardrobe", clothes);
-        log.info(">> WardrobeController getAllByType wardrobe={}", clothes);
-        switch (type) {
-            case COAT:
-                return "COAT";
-            case BOTTOM:
-                return "BOTTOM";
-            case DRESS:
-                return "DRESS";
-            case SET:
-                return "SET";
-            case TOP:
-                return "TOP";
-            default:
-                return "redirect:/";
-        }
-    }
-
-
 }

@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -40,5 +41,8 @@ public class WardrobeService {
         return wardrobeRepository.findAllBySeason(season);
     }
 
-
+    @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+    public Optional<Wardrobe> findStuffById(Long id) {
+        return wardrobeRepository.findById(id);
+    }
 }
