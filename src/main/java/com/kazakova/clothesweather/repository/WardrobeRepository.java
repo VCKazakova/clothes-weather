@@ -20,4 +20,5 @@ public interface WardrobeRepository extends JpaRepository<Wardrobe, Long> {
     List<Wardrobe> findAllPhotoByStyle(Style style);
     List<Wardrobe> findAllPhotoByType(Type type);
     List<Wardrobe> findAllPhotoBySeasonAndStyleAndType(Season season, Style style, Type type);
+
 }
