@@ -1,26 +1,65 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
-    <meta charset="UTF-8">
-    <title>Create the stuff</title>
+    <!-- Обязательные метатеги -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+
+    <title>Create stuff</title>
 </head>
 <body>
-<form action="#" th:action="@{/create}" th:object="${wardrobe}" method="post">
-    <label for="name">Name</label>
-    <input type="text" th:field="*{name}" id="name" placeholder="name">
-    <label for="type">Type</label>
-    <input type="text" th:field="*{type}" id="type" placeholder="type">
-    <label for="style">Style</label>
-    <input type="text" th:field="*{style}" id="style" placeholder="style">
-    <label for="season">Season</label>
-    <input type="text" th:field="*{season}" id="season" placeholder="season">
-    <label for="url">Photo url</label>
-    <input type="text" th:field="*{url}" id="url" placeholder="url">
-    <input type="submit" value="Create stuff">
-</form>
-</body>
-</html>
 
+
+<div class="p-3 mb-2 bg-secondary text-white">
+    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+        <a class="btn btn-outline-light" href="/home" role="button">Home</a>
+    </div>
+    <h1>Please, create a new stuff!</h1>
+</div>
+
+
+<form action="#" th:action="@{/weather/create}" th:object="${wardrobe}" method="post">
+    <p>
+        <label for="stuff">Stuff</label>
+        <input type="text" th:field="*{stuff}" id="stuff" placeholder="stuff">
+    </p>
+
+    <p>
+        <label for="type">Type</label>
+        <input type="text" th:field="*{type}" id="type" placeholder="type">
+    </p>
+
+    <p>
+        <label for="style">Style</label>
+        <input type="text" th:field="*{style}" id="style" placeholder="style">
+    </p>
+
+    <p>
+        <label for="season">Season</label>
+        <input type="text" th:field="*{season}" id="season" placeholder="season">
+    </p>
+
+    <p>
+        <label for="url">Photo url</label>
+        <input type="text" th:field="*{url}" id="url" placeholder="url">
+    </p>
+
+    <p>
+        <input type="submit" value="Create stuff">
+    </p>
+
+
+</form>
+
+
+<!-- Вариант 1: Bootstrap в связке с Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ"
+        crossorigin="anonymous"></script>
 
 
 </body>

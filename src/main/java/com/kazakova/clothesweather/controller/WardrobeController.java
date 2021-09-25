@@ -74,8 +74,8 @@ public class WardrobeController {
 
     @GetMapping("/wardrobe/update/{id}")
     public String updateStuffForm(@PathVariable("id") Long id, Model model) {
-        Wardrobe stuff = wardrobeService.findStuffById(id).orElseThrow();
-        model.addAttribute("stuff", stuff);
+        Wardrobe wardrobe = wardrobeService.findStuffById(id).orElseThrow();
+        model.addAttribute("wardrobe", wardrobe);
         return "update";
     }
 
