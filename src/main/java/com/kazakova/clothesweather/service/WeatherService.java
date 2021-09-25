@@ -89,5 +89,18 @@ public class WeatherService {
         }
     }
 
+    public int getTodayTemperature() throws IOException {
+        try {
+            String todayWeather = getTodayWeather();
+            String[] splitTodayWeather = todayWeather.split(" ");
+            String stringOfTemperature = splitTodayWeather[3];
+            String stringOfTemperatureWithoutLastElem = stringOfTemperature.substring(0, stringOfTemperature.length() - 1);
+            int i = Integer.parseInt(stringOfTemperatureWithoutLastElem);
+            return i;
+        } catch (Exception exception) {
+            throw new IOException("The temprature doesn't found!");
+        }
+    }
+
 
 }
