@@ -24,8 +24,12 @@ public class WeatherController {
     private final WardrobeService wardrobeService;
 
     @GetMapping("/weather/today/clothes")
-    public String getClothesByWeather(Model model) throws IOException {
+    public String getClothesByWeather(Model model, Model weather) throws IOException {
         int temperature = weatherService.getTodayTemperature();
+
+        String weatherToday = weatherService.getTodayWeather();
+        weather.addAttribute("weatherToday", weatherToday);
+
         if (temperature >= -5 && temperature <= 17) {
             List<Wardrobe> wardrobe = wardrobeService.findAllBySeason(Season.DEMI);
             model.addAttribute("wardrobe", wardrobe);

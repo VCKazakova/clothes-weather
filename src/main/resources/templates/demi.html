@@ -10,7 +10,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
 
-    <title>Wardrobe</title>
+    <title>Demi clothes</title>
 </head>
 <body>
 
@@ -18,8 +18,16 @@
     <div class="d-grid gap-2 d-md-flex justify-content-md-end">
         <a class="btn btn-outline-light" href="/home" role="button">Home</a>
     </div>
-    <h1>All your clothes here</h1>
+    <h1>Demi clothes</h1>
 </div>
+
+
+<div class="card text-white bg-primary mb-3" style="max-width: 18rem;">
+    <h5 class="card-title">
+        <span th:utext="${weatherToday}"></span>
+    </h5>
+</div>
+
 
 <div th:switch="${wardrobe}">
     <h2 th:case="null">No clothes found!</h2>
@@ -45,14 +53,12 @@
                 <td th:text="${wardrobe.style}"></td>
                 <td th:text="${wardrobe.season}"></td>
                 <!--                <td th:text="${wardrobe.photo}"></td>-->
-                <img th:src="@{wardrobe.photo}"/>
-                <td><a th:href="@{/wardrobe/update/{id}(id=${wardrobe.id})}">Edit</a></td>
-                <td><a th:href="@{/wardrobe/delete/{id}(id=${wardrobe.id})}">Delete</a></td>
+                <!--                <img th:src="@{wardrobe.photo}"/>-->
+                <td><img src="" th:text="${wardrobe.url}" class="img-fluid"/></td>
             </tr>
             </tbody>
         </table>
     </div>
-    <p><a href="/wardrobe/create">Create stuff</a></p>
 </div>
 
 
