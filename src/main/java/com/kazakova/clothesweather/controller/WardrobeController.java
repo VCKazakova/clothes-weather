@@ -53,7 +53,7 @@ public class WardrobeController {
 
     @GetMapping("/wardrobe/create")
     public String createStuffForm(Wardrobe wardrobe) {
-        return "wardrobe-create";
+        return "create";
     }
 
     @PostMapping("/wardrobe/create")
@@ -65,21 +65,21 @@ public class WardrobeController {
     }
 
 
-    @GetMapping("/wardrobe/stuff-delete/{id}")
+    @GetMapping("/wardrobe/delete/{id}")
     public String deleteStuff(@PathVariable("id") Long id) {
         log.info(">> WardrobeController deleteStuff id={}", id);
         wardrobeService.deleteStuffById(id);
         return "redirect:/wardrobe";
     }
 
-    @GetMapping("/wardrobe/stuff-update/{id}")
+    @GetMapping("/wardrobe/update/{id}")
     public String updateStuffForm(@PathVariable("id") Long id, Model model) {
         Wardrobe stuff = wardrobeService.findStuffById(id).orElseThrow();
         model.addAttribute("stuff", stuff);
-        return "stuff-update";
+        return "update";
     }
 
-    @PostMapping("/wardrobe/stuff-update")
+    @PostMapping("/wardrobe/update")
     public String updateStuff(Wardrobe wardrobe) {
         log.info(">> WardrobeController updateStuff stuff={}", wardrobe);
         Wardrobe stuff = wardrobeService.createStuff(wardrobe);

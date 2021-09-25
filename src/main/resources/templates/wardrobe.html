@@ -1,14 +1,29 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
-    <meta charset="UTF-8">
+    <!-- Обязательные метатеги -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+
     <title>Wardrobe</title>
 </head>
 <body>
+
+<div class="p-3 mb-2 bg-secondary text-white">
+    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+        <a class="btn btn-outline-light" href="/home" role="button">Home</a>
+    </div>
+    <h1>All your clothes here</h1>
+</div>
+
 <div th:switch="${wardrobe}">
     <h2 th:case="null">No clothes found!</h2>
     <div th:case="*">
-        <h2>Clothes</h2>
         <table>
             <thead>
             <tr>
@@ -27,15 +42,22 @@
                 <td th:text="${wardrobe.type}"></td>
                 <td th:text="${wardrobe.style}"></td>
                 <td th:text="${wardrobe.season}"></td>
-<!--                <td th:text="${wardrobe.photo}"></td>-->
+                <!--                <td th:text="${wardrobe.photo}"></td>-->
                 <img th:src="@{wardrobe.photo}"/>
-                <!--                <td><a th:href="@{author-update/{id}(id=${author.id})}">Edit</a></td>-->
-                <!--                <td><a th:href="@{author-delete/{id}(id=${author.id})}">Delete</a></td>-->
+                <td><a th:href="@{update/{id}(id=${wardrobe.id})}">Edit</a></td>
+                <td><a th:href="@{delete/{id}(id=${wardrobe.id})}">Delete</a></td>
             </tr>
             </tbody>
         </table>
     </div>
-    <p><a href="/author-create">Create stuff</a></p>
+    <p><a href="/create">Create stuff</a></p>
 </div>
+
+
+<!-- Вариант 1: Bootstrap в связке с Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ"
+        crossorigin="anonymous"></script>
+
 </body>
 </html>
