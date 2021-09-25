@@ -30,9 +30,7 @@ public class WardrobeController {
         model.addAttribute("wardrobe", clothes);
         log.info(">> WardrobeController getAllBySeason wardrobe={}", clothes);
         switch (season) {
-            case AUTUMN:
-                return "AUTUMN";
-            case SPRING:
+            case DEMI:
                 return "SPRING";
             case SUMMER:
                 return "SUMMER";
