@@ -33,6 +33,6 @@ public class Wardrobe {
     @Enumerated(EnumType.STRING)
     private Season season;
 
-    private byte[] photo;
+    String url;
 
 }

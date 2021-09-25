@@ -6,5 +6,5 @@ CREATE TABLE clothes
     type VARCHAR(255),
     style VARCHAR(255),
     season VARCHAR(255),
-    photo BYTEA
+    url VARCHAR(500)
 );

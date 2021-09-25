@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Create the stuff</title>
+</head>
+<body>
+<form action="#" th:action="@{/create}" th:object="${wardrobe}" method="post">
+    <label for="name">Name</label>
+    <input type="text" th:field="*{name}" id="name" placeholder="name">
+    <label for="type">Type</label>
+    <input type="text" th:field="*{type}" id="type" placeholder="type">
+    <label for="style">Style</label>
+    <input type="text" th:field="*{style}" id="style" placeholder="style">
+    <label for="season">Season</label>
+    <input type="text" th:field="*{season}" id="season" placeholder="season">
+    <label for="url">Photo url</label>
+    <input type="text" th:field="*{url}" id="url" placeholder="url">
+    <input type="submit" value="Create stuff">
+</form>
+</body>
+</html>
+
+
+
+</body>
+</html>
