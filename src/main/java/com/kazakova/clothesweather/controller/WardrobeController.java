@@ -31,11 +31,11 @@ public class WardrobeController {
         log.info(">> WardrobeController getAllBySeason wardrobe={}", clothes);
         switch (season) {
             case DEMI:
-                return "SPRING";
+                return "demi";
             case SUMMER:
-                return "SUMMER";
+                return "summer";
             case WINTER:
-                return "WINTER";
+                return "winter";
             default:
                 return "redirect:/";
         }
