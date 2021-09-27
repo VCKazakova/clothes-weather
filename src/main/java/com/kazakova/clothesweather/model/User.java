@@ -29,11 +29,11 @@ public class User {
     @Enumerated(value = EnumType.STRING)
     private State state;
 
-    public static User from(UserForm form) {
-        return User.builder()
-                .firstName(form.getFirstName())
-                .lastName(form.getLastName())
-                .build();
-    }
+//    public static User from(UserForm form) {
+//        return User.builder()
+//                .firstName(form.getFirstName())
+//                .lastName(form.getLastName())
+//                .build();
+//    }
 
 }
