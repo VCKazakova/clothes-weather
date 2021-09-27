@@ -1,6 +1,5 @@
 <!doctype html>
-<html lang="ru">
-<html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <!-- Обязательные метатеги -->
     <meta charset="utf-8">
@@ -14,11 +13,6 @@
 </head>
 <body>
 
-<!--<#if error??>-->
-<!--<div class="alert alert-danger" role="alert">Логин или пароль введены неверно</div>-->
-<!--</-->
-<!--#if>-->
-
 <div class="mb-3">
 
     <div class="p-3 mb-2 bg-secondary text-white">
@@ -31,12 +25,15 @@
     <form method="post" action="/login">
         <label for="login">Login
             <input class="input-field" type="text" id="login" name="login">
+            <span th:if="${#fields.hasErrors('login')}" th:errorclass="error" th:errors="*{user.login}"></span>
         </label>
         </p>
 
         <p>
             <label for="password">Password
                 <input class="input-field" type="password" id="password" name="password">
+                <span th:if="${#fields.hasErrors('password')}" th:errorclass="error"
+                      th:errors="*{user.password}"></span>
             </label>
         </p>
 
