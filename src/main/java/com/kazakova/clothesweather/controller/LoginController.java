@@ -10,18 +10,20 @@ public class LoginController {
     public String helloPage() {
         return "hello-page";
     }
+
     @GetMapping("/home")
     public String homePage() {
         return "home";
     }
+
     @GetMapping("/login")
     public String login() {
         return "login";
     }
 
-    @GetMapping("/create-account")
+    @GetMapping("/signUp")
     public String createAccount() {
-        return "create-account";
+        return "signUp";
     }
 
 }
