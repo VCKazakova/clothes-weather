@@ -57,38 +57,6 @@ public class WeatherService {
         }
     }
 
-    public static Element selectInformationAboutTomorrowWeather(Document page) {
-        return Objects.requireNonNull(page.select("div[class=days]")
-                        .first())
-                .select("div[class=weather-icon weather-icon_12 margin-bottom-10]").first();
-    }
-
-    public static String selectInformationAboutTomorrowTemperature(Document page) {
-        return Objects.requireNonNull(Objects.requireNonNull(page.select("div[class=days]")
-                        .first())
-                .select("div[class=day__temperature]").first()).text();
-    }
-
-
-    public String getTomorrowWeather() throws IOException {
-        try {
-            Element value = selectInformationAboutTomorrowWeather(getPage());
-            String tomorrowTemperature = selectInformationAboutTomorrowTemperature(getPage());
-
-            String valueToString = value.toString();
-
-            String pattern = "([а-яА-Я]+)(.*)([а-яА-Я]+)";
-            Pattern r = Pattern.compile(pattern);
-            Matcher m = r.matcher(valueToString);
-
-            if (m.find()) {
-                return "Погода на завтра: " + tomorrowTemperature + " " + m.group(0);
-            } else throw new IOException("The weather doesn't find");
-        } catch (Exception exception) {
-            throw new IOException("The weather doesn't found");
-        }
-    }
-
     public int getTodayTemperature() throws IOException {
         try {
             String todayWeather = getTodayWeather();
@@ -101,6 +69,4 @@ public class WeatherService {
             throw new IOException("The temprature doesn't found!");
         }
     }
-
-
 }

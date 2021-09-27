@@ -23,8 +23,8 @@ public class WeatherController {
     private final WeatherService weatherService;
     private final WardrobeService wardrobeService;
 
-    @GetMapping("/weather/today/clothes")
-    public String getClothesByWeather(Model model, Model weather) throws IOException {
+    @GetMapping("/weather/today")
+    public String getClothesByTodayWeather(Model model, Model weather) throws IOException {
         int temperature = weatherService.getTodayTemperature();
 
         String weatherToday = weatherService.getTodayWeather();
@@ -44,6 +44,4 @@ public class WeatherController {
         }
         return "redirect:/";
     }
-
-
 }
