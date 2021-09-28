@@ -1,24 +1,25 @@
 package com.kazakova.clothesweather.model;
 
+
+import com.kazakova.clothesweather.form.UserForm;
 import lombok.*;
 
 import javax.persistence.*;
 
 @Entity
-@AllArgsConstructor
-@NoArgsConstructor
 @Getter
 @Setter
 @Builder
-@Table(name = "user_wardrobe")
+@NoArgsConstructor
+@AllArgsConstructor
+@Table(name = "wardrobe_users")
 public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String firstName;
-    private String lastName;
+    private String name;
 
     private String login;
     private String hashPassword;
@@ -29,11 +30,10 @@ public class User {
     @Enumerated(value = EnumType.STRING)
     private State state;
 
-//    public static User from(UserForm form) {
-//        return User.builder()
-//                .firstName(form.getFirstName())
-//                .lastName(form.getLastName())
-//                .build();
-//    }
+    public static User from(UserForm form) {
+        return User.builder()
+                .name(form.getName())
+                .build();
+    }
 
 }

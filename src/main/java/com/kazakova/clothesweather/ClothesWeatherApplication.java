@@ -10,14 +10,13 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @SpringBootApplication
 public class ClothesWeatherApplication {
 
+    public static void main(String[] args) {
+        SpringApplication.run(ClothesWeatherApplication.class, args);
+    }
+
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
-    }
-
-    public static void main(String[] args) {
-        SpringApplication.run(ClothesWeatherApplication.class, args);
-
     }
 
 }
