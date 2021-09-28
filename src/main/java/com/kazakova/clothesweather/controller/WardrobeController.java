@@ -53,6 +53,7 @@ public class WardrobeController {
 
     @GetMapping("/wardrobe/create")
     public String createStuffForm(Wardrobe wardrobe) {
+        log.info(">> WardrobeController createStuffForm");
         return "create";
     }
 
@@ -74,7 +75,9 @@ public class WardrobeController {
 
     @GetMapping("/wardrobe/update/{id}")
     public String updateStuffForm(@PathVariable("id") Long id, Model model) {
+        log.info(">> WardrobeController updateStuffForm id={}", id);
         Wardrobe wardrobe = wardrobeService.findStuffById(id).orElseThrow();
+        log.info(">> WardrobeController updateStuffForm wardrobe={}", wardrobe);
         model.addAttribute("wardrobe", wardrobe);
         return "update";
     }
