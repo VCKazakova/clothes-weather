@@ -25,22 +25,31 @@ public class WeatherController {
 
     @GetMapping("/weather/today")
     public String getClothesByTodayWeather(Model model, Model weather) throws IOException {
+        log.info(">> WeatherController getClothesByTodayWeather");
+
         int temperature = weatherService.getTodayTemperature();
+        log.info(">> WeatherController getTodayTemperature temperature={}", temperature);
 
         String weatherToday = weatherService.getTodayWeather();
+        log.info(">> WeatherController getTodayWeather weatherToday={}", weatherToday);
+
         weather.addAttribute("weatherToday", weatherToday);
 
         if (temperature >= -5 && temperature <= 17) {
             List<Wardrobe> wardrobe = wardrobeService.findAllBySeason(Season.DEMI);
             model.addAttribute("wardrobe", wardrobe);
+            log.info(">> WeatherController getClothesByTodayWeather wardrobe={}", wardrobe);
             return "demi";
         } else if (temperature <= -6 && temperature >= -45) {
             List<Wardrobe> wardrobe = wardrobeService.findAllBySeason(Season.WINTER);
             model.addAttribute("wardrobe", wardrobe);
+            log.info(">> WeatherController getClothesByTodayWeather wardrobe={}", wardrobe);
             return "winter";
         } else if (temperature >= 18 && temperature <= 45) {
             List<Wardrobe> wardrobe = wardrobeService.findAllBySeason(Season.SUMMER);
             model.addAttribute("wardrobe", wardrobe);
+            log.info(">> WeatherController getClothesByTodayWeather wardrobe={}", wardrobe);
+            return "summer";
         }
         return "redirect:/";
     }
