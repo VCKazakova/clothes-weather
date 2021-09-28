@@ -1,6 +1,7 @@
 package com.kazakova.clothesweather.service;
 
 
+import com.kazakova.clothesweather.exception.ApiRequestException;
 import com.kazakova.clothesweather.model.Season;
 import com.kazakova.clothesweather.model.Wardrobe;
 import com.kazakova.clothesweather.repository.WardrobeRepository;
@@ -33,7 +34,11 @@ public class WardrobeService {
 
     @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
     public List<Wardrobe> findAll() {
-        return wardrobeRepository.findAll();
+        List<Wardrobe> wardrobe = wardrobeRepository.findAll();
+        if (wardrobe.isEmpty()) {
+            throw new ApiRequestException("Dont't find any clothes");
+        }
+        return wardrobe;
     }
 
     @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
