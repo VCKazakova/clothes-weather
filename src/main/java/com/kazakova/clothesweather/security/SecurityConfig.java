@@ -1,6 +1,8 @@
 package com.kazakova.clothesweather.security;
 
 
+import com.kazakova.clothesweather.model.Role;
+import com.kazakova.clothesweather.model.User;
 import lombok.Builder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -34,13 +36,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private DataSource dataSource;
 
     @Override
-    protected void configure(HttpSecurity http) throws Exception {
-        http.csrf().disable()
-                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                .and()
+    protected void configure(final HttpSecurity http) throws Exception {
+        http
+                .csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/").permitAll()
-                .antMatchers("/signUp/**").permitAll()
+                .antMatchers("/home/**").hasAuthority("USER")
+                .antMatchers("/wardrobe/**").hasAuthority("USER")
+                .antMatchers("/weather/**").hasAuthority("USER")
+                .antMatchers("/login*").permitAll()
+                .antMatchers("/signUp*").permitAll()
+                .anyRequest().authenticated()
                 .and()
                 .formLogin()
                 .loginPage("/login")
@@ -49,9 +54,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .defaultSuccessUrl("/home", true)
                 .and()
                 .rememberMe()
-                .rememberMeParameter("remember-me")
-                .tokenRepository(tokenRepository());
-
+                .rememberMeParameter("remember-me");
     }
 
 
