@@ -24,21 +24,23 @@ public class WardrobeService {
 
     @Transactional(rollbackFor = {SQLException.class})
     public Wardrobe createStuff(Wardrobe wardrobe) {
+        if (wardrobe == null) {
+            throw new ApiRequestException("The entity mustn't be null");
+        }
         return wardrobeRepository.save(wardrobe);
     }
 
     @Transactional(rollbackFor = {SQLException.class})
     public void deleteStuffById(Long id) {
+        if (id == null) {
+            throw new ApiRequestException("The id mustn't be null");
+        }
         wardrobeRepository.deleteById(id);
     }
 
     @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
     public List<Wardrobe> findAll() {
-        List<Wardrobe> wardrobe = wardrobeRepository.findAll();
-        if (wardrobe.isEmpty()) {
-            throw new ApiRequestException("Dont't find any clothes");
-        }
-        return wardrobe;
+        return wardrobeRepository.findAll();
     }
 
     @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
@@ -48,6 +50,9 @@ public class WardrobeService {
 
     @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
     public Optional<Wardrobe> findStuffById(Long id) {
+        if (id == null) {
+            throw new ApiRequestException("The id mustn't be null");
+        }
         return wardrobeRepository.findById(id);
     }
 }

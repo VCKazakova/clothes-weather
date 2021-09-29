@@ -16,7 +16,6 @@ public class ApiExceptionHandler {
                 badRequest
         );
         return new ResponseEntity<>(apiException, badRequest);
-
     }
 
 
