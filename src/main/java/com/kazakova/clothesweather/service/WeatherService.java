@@ -66,7 +66,7 @@ public class WeatherService {
             int i = Integer.parseInt(stringOfTemperatureWithoutLastElem);
             return i;
         } catch (Exception exception) {
-            throw new IOException("The temprature doesn't found!");
+            throw new IOException("The temperature doesn't found!");
         }
     }
 }
