@@ -1,5 +1,6 @@
 package com.kazakova.clothesweather.service;
 
+import com.kazakova.clothesweather.exception.ApiRequestException;
 import com.kazakova.clothesweather.model.Season;
 import com.kazakova.clothesweather.model.Style;
 import com.kazakova.clothesweather.model.Type;
@@ -18,6 +19,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.SQLException;
 import java.util.Optional;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.AssertionsForClassTypes.catchThrowable;
 
 @DisplayName("Service Wardrobe должен")
 @DataJpaTest
@@ -58,6 +62,20 @@ public class WardrobeServiceTest {
     }
 
     @Test
+    @DisplayName("Выкидывать exception при entity==null")
+    @Transactional(rollbackFor = {SQLException.class})
+    public void testThrowExceptionWhenEntityIsNull() throws ApiRequestException {
+        Wardrobe wardrobe = null;
+
+        Throwable thrown = catchThrowable(() -> {
+            wardrobeService.createStuff(wardrobe);
+        });
+        assertThat(thrown).isInstanceOf(ApiRequestException.class);
+        assertThat(thrown.getMessage()).isNotBlank();
+    }
+
+
+    @Test
     @DisplayName("Удалять wardrobe по id")
     @Transactional(rollbackFor = {SQLException.class})
     public void testDeleteWardrobeById() {
@@ -65,6 +83,17 @@ public class WardrobeServiceTest {
         Integer actualNumberOfStuffs = wardrobeService.findAll().size();
 
         Assertions.assertEquals(EXPECTED_NUMBER_OF_STUFFS, actualNumberOfStuffs);
+    }
+
+    @Test
+    @DisplayName("Выкидывать exception при id==null")
+    @Transactional(rollbackFor = {SQLException.class})
+    public void testThrowExceptionWhenIdIsNull() throws ApiRequestException {
+        Throwable thrown = catchThrowable(() -> {
+            wardrobeService.deleteStuffById(null);
+        });
+        assertThat(thrown).isInstanceOf(ApiRequestException.class);
+        assertThat(thrown.getMessage()).isNotBlank();
     }
 
     @Test
@@ -95,6 +124,17 @@ public class WardrobeServiceTest {
         String actualStuffOfWardrobe = optionalWardrobe.get().getStuff();
 
         Assertions.assertEquals(EXPECTED_STUFF, actualStuffOfWardrobe);
+    }
+
+    @Test
+    @DisplayName("Выкидывать exception при id==null")
+    @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+    public void testThrowExceptionWhenIdOfGetIsNull() throws ApiRequestException {
+        Throwable thrown = catchThrowable(() -> {
+            wardrobeService.findStuffById(null);
+        });
+        assertThat(thrown).isInstanceOf(ApiRequestException.class);
+        assertThat(thrown.getMessage()).isNotBlank();
     }
 
 }
