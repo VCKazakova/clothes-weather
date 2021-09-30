@@ -6,5 +6,6 @@ public enum Type {
     SET,
     DRESS,
     COAT,
+    HAT,
     SHOES;
 }
