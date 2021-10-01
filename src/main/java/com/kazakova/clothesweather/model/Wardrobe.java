@@ -35,4 +35,16 @@ public class Wardrobe {
 
     String url;
 
+    @Override
+    public String toString() {
+        return "Wardrobe{" +
+                "id=" + id +
+                ", stuff='" + stuff + '\'' +
+                ", type=" + type +
+                ", style=" + style +
+                ", season=" + season +
+                ", url='" + url + '\'' +
+                '}';
+    }
+
 }
