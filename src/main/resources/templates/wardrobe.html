@@ -45,7 +45,7 @@
                 <td th:text="${wardrobe.style}"></td>
                 <td th:text="${wardrobe.season}"></td>
                 <!--                <td th:text="${wardrobe.photo}"></td>-->
-                <img th:src="@{wardrobe.photo}"/>
+                <img th:src="@{wardrobe.photo}" alt="" src=""/>
                 <td><a th:href="@{/wardrobe/update/{id}(id=${wardrobe.id})}">Edit</a></td>
                 <td><a th:href="@{/wardrobe/delete/{id}(id=${wardrobe.id})}">Delete</a></td>
             </tr>
