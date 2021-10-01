@@ -60,7 +60,7 @@ public class LoginTest {
     @Test
     @DisplayName("Проверять корректность логина")
     public void testCheckLoginIsCorrect() throws Exception {
-        this.mockMvc.perform(formLogin().user("vika").password("1234"))
+        this.mockMvc.perform(formLogin().user("login", "vika").password("1234"))
                 .andDo(print())
                 .andExpect(status().is3xxRedirection())
                 .andExpect(redirectedUrl("/home"));
