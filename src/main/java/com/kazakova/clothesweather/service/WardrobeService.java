@@ -5,6 +5,7 @@ import com.kazakova.clothesweather.exception.ApiRequestException;
 import com.kazakova.clothesweather.model.Season;
 import com.kazakova.clothesweather.model.Wardrobe;
 import com.kazakova.clothesweather.repository.WardrobeRepository;
+import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
