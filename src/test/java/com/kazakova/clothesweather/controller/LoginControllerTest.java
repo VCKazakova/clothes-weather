@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.test.context.support.WithUserDetails;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
@@ -33,6 +34,9 @@ public class LoginControllerTest {
 
     @Autowired
     private LoginController loginController;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
 
     @Test
@@ -109,10 +113,11 @@ public class LoginControllerTest {
         userForm.setLogin("oleg");
         userForm.setPassword("1234");
 
+
         mockMvc.perform(request.content(String.valueOf(userForm))
                         .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.name").value("Oleg"))
+                .andExpect(status().is3xxRedirection())
+                .andExpect(redirectedUrlTemplate("/login"))
                 .andDo(print());
     }
 
