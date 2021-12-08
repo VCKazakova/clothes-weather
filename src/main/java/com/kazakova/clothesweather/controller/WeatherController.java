@@ -6,7 +6,6 @@ import com.kazakova.clothesweather.service.WardrobeService;
 import com.kazakova.clothesweather.service.WeatherService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,12 +13,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import java.io.IOException;
 import java.util.List;
 
-@Controller
 @Slf4j
+@Controller
 @RequiredArgsConstructor
 public class WeatherController {
-    // TODO убрать
-    @Autowired
+
     private final WeatherService weatherService;
     private final WardrobeService wardrobeService;
 
@@ -35,26 +33,19 @@ public class WeatherController {
 
         weather.addAttribute("weatherToday", weatherToday);
 
-        // TODO убать дубликат логики, вынетсина сервис
-        if (temperature >= -5 && temperature <= 17) {
-            List<Wardrobe> wardrobe = wardrobeService.findAllBySeason(Season.DEMI);
-            model.addAttribute("wardrobe", wardrobe);
-            log.info(">> WeatherController getClothesByTodayWeather wardrobe={}", wardrobe);
+        Season currentSeason = weatherService.getWardrobeByWeather(temperature);
+
+        List<Wardrobe> wardrobe = wardrobeService.findAllBySeason(currentSeason);
+        model.addAttribute("wardrobe", wardrobe);
+        log.info("<< WeatherController getClothesByTodayWeather wardrobe={}", wardrobe);
+
+        if (currentSeason == Season.DEMI)
             return "demi";
-        } else if (temperature <= -6 && temperature >= -45) {
-            List<Wardrobe> wardrobe = wardrobeService.findAllBySeason(Season.WINTER);
-            model.addAttribute("wardrobe", wardrobe);
-            log.info(">> WeatherController getClothesByTodayWeather wardrobe={}", wardrobe);
-            return "winter";
-        } else if (temperature >= 18 && temperature <= 45) {
-            List<Wardrobe> wardrobe = wardrobeService.findAllBySeason(Season.SUMMER);
-            model.addAttribute("wardrobe", wardrobe);
-            log.info(">> WeatherController getClothesByTodayWeather wardrobe={}", wardrobe);
+        else if (currentSeason == Season.SUMMER)
             return "summer";
-        }
-
-
-        return "redirect:/";
+        else if (currentSeason == Season.WINTER)
+            return "winter";
+        else return "redirect:/";
     }
-
 }
+

@@ -1,5 +1,6 @@
 package com.kazakova.clothesweather.service;
 
+import com.kazakova.clothesweather.model.Season;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -69,4 +70,14 @@ public class WeatherService {
             throw new IOException("The temperature doesn't found!");
         }
     }
+
+    public Season getWardrobeByWeather(int temperature) {
+        if (temperature >= -5 && temperature <= 17)
+            return Season.DEMI;
+        else if (temperature <= -6)
+            return Season.WINTER;
+        else return Season.SUMMER;
+    }
+
+
 }
