@@ -5,19 +5,16 @@ import com.kazakova.clothesweather.model.Role;
 import com.kazakova.clothesweather.model.State;
 import com.kazakova.clothesweather.model.User;
 import com.kazakova.clothesweather.repository.UserRepository;
-import lombok.NoArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
+@RequiredArgsConstructor
 public class SignUpServiceImpl implements SignUpService {
 
-    @Autowired
-    private UserRepository userRepository;
-
-    @Autowired
-    private PasswordEncoder passwordEncoder;
+    private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
 
     @Override
     public void signUp(UserForm userForm) {

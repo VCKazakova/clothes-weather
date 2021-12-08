@@ -5,9 +5,7 @@ import com.kazakova.clothesweather.exception.ApiRequestException;
 import com.kazakova.clothesweather.model.Season;
 import com.kazakova.clothesweather.model.Wardrobe;
 import com.kazakova.clothesweather.repository.WardrobeRepository;
-import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,8 +17,7 @@ import java.util.Optional;
 @Service
 @RequiredArgsConstructor
 public class WardrobeService {
-    // TODO убрать лишнее
-    @Autowired
+
     private final WardrobeRepository wardrobeRepository;
 
     @Transactional(rollbackFor = {SQLException.class})
