@@ -2,14 +2,12 @@ package com.kazakova.clothesweather.model;
 
 
 import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import javax.persistence.*;
 
-@Getter
-@Setter
+@Data
 @Entity
 @Table(name = "clothes")
 @AllArgsConstructor
@@ -34,18 +32,5 @@ public class Wardrobe {
     private Season season;
 
     String url;
-
-    // TODO убрать и добавить аннотацию
-    @Override
-    public String toString() {
-        return "Wardrobe{" +
-                "id=" + id +
-                ", stuff='" + stuff + '\'' +
-                ", type=" + type +
-                ", style=" + style +
-                ", season=" + season +
-                ", url='" + url + '\'' +
-                '}';
-    }
 
 }

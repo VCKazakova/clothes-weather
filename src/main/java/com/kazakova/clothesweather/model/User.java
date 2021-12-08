@@ -2,13 +2,15 @@ package com.kazakova.clothesweather.model;
 
 
 import com.kazakova.clothesweather.form.UserForm;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
+@Data
 @Entity
-@Getter
-@Setter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
