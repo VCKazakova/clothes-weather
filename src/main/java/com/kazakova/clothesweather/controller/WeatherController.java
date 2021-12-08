@@ -10,7 +10,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import java.io.IOException;
 import java.util.List;
 
 @Slf4j
@@ -22,7 +21,7 @@ public class WeatherController {
     private final WardrobeService wardrobeService;
 
     @GetMapping("/weather/today")
-    public String getClothesByTodayWeather(Model model, Model weather) throws IOException {
+    public String getClothesByTodayWeather(Model model, Model weather) {
         log.info(">> WeatherController getClothesByTodayWeather");
 
         int temperature = weatherService.getTodayTemperature();

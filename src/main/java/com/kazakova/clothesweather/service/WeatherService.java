@@ -1,6 +1,7 @@
 package com.kazakova.clothesweather.service;
 
 import com.kazakova.clothesweather.model.Season;
+import lombok.extern.slf4j.Slf4j;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Node;
@@ -16,16 +17,18 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 @Service
+@Slf4j
 public class WeatherService {
 
-    public static Document getPage() throws IOException {
+    public static Document getPage() {
         try {
             String url = "https://pogoda.mail.ru/prognoz/moskva/";
             Document page = Jsoup.parse(new URL(url), 100000);
             return page;
         } catch (Exception exception) {
-            throw new IOException("The page doesn't found");
+            log.error(">> WeatherService getPage exception={}", exception.getClass().getName());
         }
+        return null;
     }
 
 
@@ -35,9 +38,9 @@ public class WeatherService {
                 .select("div[class=information__content__temperature]");
     }
 
-    public String getTodayWeather() throws IOException {
+    public String getTodayWeather() {
         try {
-            Elements values = selectInformationAboutTodayWeather(getPage());
+            Elements values = selectInformationAboutTodayWeather(Objects.requireNonNull(getPage()));
             String todayTemperature = values.text();
 
             Elements span = values.select("span");
@@ -52,12 +55,13 @@ public class WeatherService {
             if (m.find()) {
                 return "Погода на сегодня: " + todayTemperature + " " + m.group(0);
             } else throw new IOException("The weather doesn't find");
-        } catch (Exception exception) {
-            throw new IOException("The weather doesn't found");
+        } catch (IOException exception) {
+            log.error(">> WeatherService getTodayWeather exception={}", exception.getClass().getName());
         }
+        return null;
     }
 
-    public int getTodayTemperature() throws IOException {
+    public int getTodayTemperature() {
         try {
             String todayWeather = getTodayWeather();
             String[] splitTodayWeather = todayWeather.split(" ");
@@ -66,8 +70,9 @@ public class WeatherService {
             int i = Integer.parseInt(stringOfTemperatureWithoutLastElem);
             return i;
         } catch (Exception exception) {
-            throw new IOException("The temperature doesn't found!");
+            log.error(">> WeatherService getTodayWeather exception={}", exception.getClass().getName());
         }
+        return 0;
     }
 
     public Season getWardrobeByWeather(int temperature) {
@@ -77,6 +82,5 @@ public class WeatherService {
             return Season.WINTER;
         else return Season.SUMMER;
     }
-
 
 }
