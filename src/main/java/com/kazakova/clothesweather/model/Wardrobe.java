@@ -35,6 +35,7 @@ public class Wardrobe {
 
     String url;
 
+    // TODO убрать и добавить аннотацию
     @Override
     public String toString() {
         return "Wardrobe{" +

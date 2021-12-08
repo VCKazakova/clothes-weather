@@ -19,7 +19,7 @@ import java.util.Optional;
 @Service
 @RequiredArgsConstructor
 public class WardrobeService {
-
+    // TODO убрать лишнее
     @Autowired
     private final WardrobeRepository wardrobeRepository;
 

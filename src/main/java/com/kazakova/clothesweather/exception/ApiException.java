@@ -3,6 +3,7 @@ package com.kazakova.clothesweather.exception;
 import lombok.Getter;
 import org.springframework.http.HttpStatus;
 
+// TODO переименовать
 @Getter
 public class ApiException {
 

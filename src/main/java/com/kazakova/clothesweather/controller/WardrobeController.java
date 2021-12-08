@@ -20,7 +20,6 @@ import java.util.List;
 @Slf4j
 public class WardrobeController {
 
-    @Autowired
     private final WardrobeService wardrobeService;
 
     @GetMapping("/wardrobe/{season}")

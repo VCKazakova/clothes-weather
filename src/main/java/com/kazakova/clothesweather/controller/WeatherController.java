@@ -18,7 +18,7 @@ import java.util.List;
 @Slf4j
 @RequiredArgsConstructor
 public class WeatherController {
-
+    // TODO убрать
     @Autowired
     private final WeatherService weatherService;
     private final WardrobeService wardrobeService;
@@ -35,6 +35,7 @@ public class WeatherController {
 
         weather.addAttribute("weatherToday", weatherToday);
 
+        // TODO убать дубликат логики, вынетсина сервис
         if (temperature >= -5 && temperature <= 17) {
             List<Wardrobe> wardrobe = wardrobeService.findAllBySeason(Season.DEMI);
             model.addAttribute("wardrobe", wardrobe);
@@ -51,6 +52,8 @@ public class WeatherController {
             log.info(">> WeatherController getClothesByTodayWeather wardrobe={}", wardrobe);
             return "summer";
         }
+
+
         return "redirect:/";
     }
 

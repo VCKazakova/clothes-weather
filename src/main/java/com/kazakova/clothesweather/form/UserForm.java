@@ -5,6 +5,7 @@ import lombok.*;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+// todo убрать лишние аннотации
 @Getter
 @Setter
 public class UserForm {
