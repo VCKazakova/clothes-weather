@@ -1,6 +1,6 @@
 package com.kazakova.clothesweather.service;
 
-import com.kazakova.clothesweather.exception.ApiRequestException;
+import com.kazakova.clothesweather.exception.RequestException;
 import com.kazakova.clothesweather.model.Season;
 import com.kazakova.clothesweather.model.Style;
 import com.kazakova.clothesweather.model.Type;
@@ -64,13 +64,13 @@ public class WardrobeServiceTest {
     @Test
     @DisplayName("Выкидывать exception при entity==null")
     @Transactional(rollbackFor = {SQLException.class})
-    public void testThrowExceptionWhenEntityIsNull() throws ApiRequestException {
+    public void testThrowExceptionWhenEntityIsNull() throws RequestException {
         Wardrobe wardrobe = null;
 
         Throwable thrown = catchThrowable(() -> {
             wardrobeService.createStuff(wardrobe);
         });
-        assertThat(thrown).isInstanceOf(ApiRequestException.class);
+        assertThat(thrown).isInstanceOf(RequestException.class);
         assertThat(thrown.getMessage()).isNotBlank();
     }
 
@@ -88,11 +88,11 @@ public class WardrobeServiceTest {
     @Test
     @DisplayName("Выкидывать exception при id==null")
     @Transactional(rollbackFor = {SQLException.class})
-    public void testThrowExceptionWhenIdIsNull() throws ApiRequestException {
+    public void testThrowExceptionWhenIdIsNull() throws RequestException {
         Throwable thrown = catchThrowable(() -> {
             wardrobeService.deleteStuffById(null);
         });
-        assertThat(thrown).isInstanceOf(ApiRequestException.class);
+        assertThat(thrown).isInstanceOf(RequestException.class);
         assertThat(thrown.getMessage()).isNotBlank();
     }
 
@@ -129,11 +129,11 @@ public class WardrobeServiceTest {
     @Test
     @DisplayName("Выкидывать exception при id==null")
     @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-    public void testThrowExceptionWhenIdOfGetIsNull() throws ApiRequestException {
+    public void testThrowExceptionWhenIdOfGetIsNull() throws RequestException {
         Throwable thrown = catchThrowable(() -> {
             wardrobeService.findStuffById(null);
         });
-        assertThat(thrown).isInstanceOf(ApiRequestException.class);
+        assertThat(thrown).isInstanceOf(RequestException.class);
         assertThat(thrown.getMessage()).isNotBlank();
     }
 

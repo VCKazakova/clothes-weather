@@ -1,7 +1,7 @@
 package com.kazakova.clothesweather.service;
 
 
-import com.kazakova.clothesweather.exception.ApiRequestException;
+import com.kazakova.clothesweather.exception.RequestException;
 import com.kazakova.clothesweather.model.Season;
 import com.kazakova.clothesweather.model.Wardrobe;
 import com.kazakova.clothesweather.repository.WardrobeRepository;
@@ -23,7 +23,7 @@ public class WardrobeService {
     @Transactional(rollbackFor = {SQLException.class})
     public Wardrobe createStuff(Wardrobe wardrobe) {
         if (wardrobe == null) {
-            throw new ApiRequestException("The entity mustn't be null");
+            throw new RequestException("The entity mustn't be null");
         }
         return wardrobeRepository.save(wardrobe);
     }
@@ -31,7 +31,7 @@ public class WardrobeService {
     @Transactional(rollbackFor = {SQLException.class})
     public void deleteStuffById(Long id) {
         if (id == null) {
-            throw new ApiRequestException("The id mustn't be null");
+            throw new RequestException("The id mustn't be null");
         }
         wardrobeRepository.deleteById(id);
     }
@@ -49,7 +49,7 @@ public class WardrobeService {
     @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
     public Optional<Wardrobe> findStuffById(Long id) {
         if (id == null) {
-            throw new ApiRequestException("The id mustn't be null");
+            throw new RequestException("The id mustn't be null");
         }
         return wardrobeRepository.findById(id);
     }
