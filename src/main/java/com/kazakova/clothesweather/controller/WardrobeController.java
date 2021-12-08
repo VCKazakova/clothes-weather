@@ -6,7 +6,6 @@ import com.kazakova.clothesweather.model.Wardrobe;
 import com.kazakova.clothesweather.service.WardrobeService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,9 +14,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
 
+@Slf4j
 @Controller
 @RequiredArgsConstructor
-@Slf4j
 public class WardrobeController {
 
     private final WardrobeService wardrobeService;
@@ -27,7 +26,7 @@ public class WardrobeController {
         log.info(">> WardrobeController getAllBySeason  season={}", season);
         List<Wardrobe> clothes = wardrobeService.findAllBySeason(season);
         model.addAttribute("wardrobe", clothes);
-        log.info(">> WardrobeController getAllBySeason wardrobe={}", clothes);
+        log.info("<< WardrobeController getAllBySeason wardrobe={}", clothes);
         switch (season) {
             case DEMI:
                 return "demi-season";
@@ -45,7 +44,7 @@ public class WardrobeController {
         log.info(">> WardrobeController getAll");
         List<Wardrobe> wardrobe = wardrobeService.findAll();
         model.addAttribute("wardrobe", wardrobe);
-        log.info(">> WardrobeController getAll wardrobe={}", wardrobe);
+        log.info("<< WardrobeController getAll wardrobe={}", wardrobe);
         return "wardrobe";
     }
 
@@ -60,7 +59,7 @@ public class WardrobeController {
     public String createStuff(Wardrobe wardrobe) {
         log.info(">> WardrobeController createStuff wardrobe={}", wardrobe);
         Wardrobe newStuff = wardrobeService.createStuff(wardrobe);
-        log.info(">> WardrobeController createStuff  stuff={}", newStuff);
+        log.info("<< WardrobeController createStuff  stuff={}", newStuff);
         return "redirect:/wardrobe";
     }
 
@@ -76,7 +75,7 @@ public class WardrobeController {
     public String updateStuffForm(@PathVariable("id") Long id, Model model) {
         log.info(">> WardrobeController updateStuffForm id={}", id);
         Wardrobe wardrobe = wardrobeService.findStuffById(id).orElseThrow();
-        log.info(">> WardrobeController updateStuffForm wardrobe={}", wardrobe);
+        log.info("<< WardrobeController updateStuffForm wardrobe={}", wardrobe);
         model.addAttribute("wardrobe", wardrobe);
         return "update";
     }
@@ -85,7 +84,7 @@ public class WardrobeController {
     public String updateStuff(Wardrobe wardrobe) {
         log.info(">> WardrobeController updateStuff stuff={}", wardrobe);
         Wardrobe stuff = wardrobeService.createStuff(wardrobe);
-        log.info(">> WardrobeController updateStuff stuff={}", stuff);
+        log.info("<< WardrobeController updateStuff stuff={}", stuff);
         return "redirect:/wardrobe";
     }
 }
